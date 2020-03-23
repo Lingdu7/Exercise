@@ -16,6 +16,8 @@ body,html{
     // 开始游戏
     .start{
         .startBox{
+
+     max-width: 450px;
             width: 100%;
             height: 100vh;
             position: fixed;
@@ -38,6 +40,8 @@ body,html{
         background: url('./images/progress.png') no-repeat 0 0 / cover;
     }
     .scoreBtn{
+
+        max-width: 225px;
         position: absolute;
         bottom: 145px;
         left: 50%;
@@ -64,10 +68,13 @@ body,html{
 .rule{
     display: none;
     position: fixed;
+    max-width: 450px;
     width: 100%;
     height: 100vh;
     background: rgba($color: #000000, $alpha: 0.8);
     .box{
+
+      max-width: 450px;
         position: absolute;
         top: 120px;
         width: 100%;
@@ -91,12 +98,16 @@ body,html{
 .over{
     display: none;
     position: fixed;
+
+    max-width: 450px;
     width: 100%;
     height: 100vh;
     background: rgba($color: #000000, $alpha: 0.8);
     h1{
         position: absolute;
         top: 30%;
+
+    max-width: 450px;
         width: 100%;
         text-align: center;
         color: #ff4500;
@@ -104,6 +115,8 @@ body,html{
         font-size: 45px;
     }
     .btn{
+
+    max-width: 225px;
         position: absolute;
         bottom: 245px;
         left: 50%;
