@@ -26,7 +26,6 @@ $(function () {
     // 点击事件
     gameRules(img,roles)
 
-    schebule()
 
     }
         /**
@@ -72,9 +71,12 @@ $(function () {
      * 计时
      */
     function schebule() {
-       setTimeout(function() {
+
+        console.log(1);
+       var setOut=setTimeout(function() {
         clearInterval(settim)
         $('.over').fadeIn(100)
+        clearTimeout(setOut)
        }, 10000);
         $('.schebule').animate({
             width:1
@@ -97,14 +99,15 @@ $(function () {
     $('.scoreBtn').click(function(){
         $('.startBox').hide()
         start()
+        schebule()
     })
 
     $('.over .btn').click(function(){
-        console.log($(this));
         $('.over').hide()
         $('.gaming').empty()
         $('.schebule').width(schebuleWidth)
         start()
+        schebule()
     })
     $('.ruleBtn').click(()=>{
         $('.rule').fadeIn(100)
