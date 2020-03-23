@@ -71,8 +71,6 @@ $(function () {
      * 计时
      */
     function schebule() {
-
-        console.log(1);
        var setOut=setTimeout(function() {
         clearInterval(settim)
         $('.over').fadeIn(100)
