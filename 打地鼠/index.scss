@@ -1,0 +1,142 @@
+*{
+    box-sizing: border-box;
+}
+body,html{
+    margin: 0;
+}
+.bg{
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 450px;
+    height: 100vh;
+    margin: 0 auto;
+    background: url(./images/game_bg.jpg) no-repeat 0 0 / 100% 100%;
+
+    // 开始游戏
+    .start{
+        .startBox{
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            background: rgba($color: #000000, $alpha: 0.3);
+        }
+    .score{
+        position: absolute;
+        top: 10px;
+        left: 75px;
+        font-size: 36px;
+        color: rgb(228, 251, 255);
+    }
+    .schebule{
+        position: absolute;
+        top: 13.7%;
+        left: 19.6%;
+        width: 56.5%;
+        height: 3.4%;
+        border-radius: 100px;
+        background: url('./images/progress.png') no-repeat 0 0 / cover;
+    }
+    .scoreBtn{
+        position: absolute;
+        bottom: 145px;
+        left: 50%;
+        transform: translateX(-50%);
+        line-height: 50px;
+        width: 50%;
+        font-size: 20px;
+        text-align: center;
+        background: #f00;
+        color: #fff;
+        border-radius: 100px;
+    }
+    .ruleBtn{
+        position: absolute;
+        bottom: 0;
+        margin: 0;
+        background: rgba($color: #eee, $alpha: 0.7);
+        text-align: center;
+        width: 100%;
+        line-height: 24px;
+    }
+}
+// 游戏规则
+.rule{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: rgba($color: #000000, $alpha: 0.8);
+    .box{
+        position: absolute;
+        top: 120px;
+        width: 100%;
+        p{
+            text-align: center;
+            font-size: 22px;
+            color: #fff;
+            line-height: 50px;
+        }
+        .btn{
+            margin: 50px auto;
+            width: 100%;
+            text-align: center;
+            color: #f00;
+            font-size: 22px;
+        }
+    }
+}
+
+// 游戏结束
+.over{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: rgba($color: #000000, $alpha: 0.8);
+    h1{
+        position: absolute;
+        top: 30%;
+        width: 100%;
+        text-align: center;
+        color: #ff4500;
+        text-shadow: 3px 3px 0 #fff;
+        font-size: 45px;
+    }
+    .btn{
+        position: absolute;
+        bottom: 245px;
+        left: 50%;
+        transform: translateX(-50%);
+        line-height: 50px;
+        width: 50%;
+        font-size: 20px;
+        text-align: center;
+        background: #007DDC;
+        color: #fff;
+        border-radius: 100px;
+    }
+}
+// 游戏中
+.gaming{
+img{
+width: 180px;
+position: absolute;
+}
+}
+}
+
+
+/*
+
+ 
+   
+    left: 4.8%;
+    top: 59.3%;
+
+    left: 59.8%;
+    top: 60%;
+
+    left: 32.8%;
+    top: 55.2%;
+    */
