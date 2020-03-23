@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        textarea {
+            position: fixed;
+            top: 70%;
+            width: 300px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+        }
+
+        .wishing {
+            width: 120px;
+            height: 80px;
+            position: fixed;
+            opacity: 0.8;
+            cursor: move;
+            border-radius: 5px;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        .wishing p {
+            font-size: 16px;
+        }
+
+        .wishing span {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            cursor: pointer
+        }
+    </style>
+</head>
+
+<body>
+    <div style="position:relative;">
+
+    </div>
+    <textarea cols="30" rows="5"></textarea>
+    <script>
+        var zIndex = 1
+        var wishingBox = document.querySelector('div')
+        var text = document.querySelector('textarea')
+        var maxWidth = document.documentElement.clientWidth - 120
+        var maxHeight = document.documentElement.clientHeight * 0.65 - 80
+        var vWidth = document.documentElement.clientWidth
+        var vHeight = document.documentElement.clientHeight
+        console.log(maxWidth, maxHeight);
+
+
+        function math(max) {
+            return Math.floor(Math.random() * (max + 1))
+        }
+
+
+        function wishingBlock(text) {
+            var wishing = document.createElement('div')
+            wishing.innerHTML = `<p>${text}</p><span>X</span>`
+            wishing.className = 'wishing'
+            wishing.style.left = math(maxWidth) + 'px'
+            wishing.style.top = math(maxHeight) + 'px'
+            var color=math(15777210).toString(16)
+            color='#' + (Array(6).join(0) + color).slice(-6)
+            wishing.style.background = color
+            return wishing
+        }
+
+
+        window.onkeydown = function (e) {
+            if (e.key == 'Enter' && text.value.replace(/[\r\n]/g, "")) {
+                wishingBox.appendChild(wishingBlock(text.value))
+                text.value = ""
+                // console.log(text.value);
+            }
+        }
+
+
+        wishingBox.onclick = function (e) {
+            if (e.target.tagName == 'SPAN') {
+                e.target.parentNode.remove()
+
+            }
+        }
+
+
+        wishingBox.onmousedown = function (e) {
+            if (e.target.tarName = 'DIV') {
+
+                e.target.style.zIndex = zIndex
+                zIndex++
+                var block = e.target
+                var pageX = e.pageX;
+                var pageY = e.pageY;
+                var style = getComputedStyle(block)
+                var divLeft = parseFloat(style.left)
+                var divTop = parseFloat(style.top)
+
+                wishingBox.onmousemove = function (e) {
+                    console.log(e.movementX);
+                    console.log(e.pageX - pageX);
+                    var disX = e.pageX - pageX + divLeft
+                    var disY = e.pageY - pageY + divTop
+                    disX = disX > maxWidth ? maxWidth : disX
+                    disY = disY > maxHeight ? maxHeight : disY
+                    e.target.style.left = disX + 'px'
+                    e.target.style.top = disY + 'px'
+                }
+
+                window.onmouseup = function () {
+                    wishingBox.onmousemove = null;
+                }
+            }
+
+        }
+
+        window.addEventListener('resize', function () {
+            var disX = document.documentElement.clientWidth-120
+            var disY = document.documentElement.clientHeight * 0.65 - 80
+
+            console.log(disX,disY);
+            for (let index = 0; index < wishingBox.children.length; index++) {
+                var blockLeft=parseFloat(wishingBox.children[index].style.left)
+                var newLeft=blockLeft/maxWidth*disX
+                var blockTop=parseFloat(wishingBox.children[index].style.top)
+                var newTop=blockTop/maxHeight*disY
+                newLeft=newLeft>disX?disX:newLeft
+                newTop=newTop>disY?disY:newTop
+                wishingBox.children[index].style.left=newLeft+'px'
+                wishingBox.children[index].style.top=newTop+'px'
+            }
+            
+            maxWidth = disX
+            maxHeight = disY
+
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            position: relative;
+            width: 750px;
+            height: 550px;
+            margin: 0 auto;
+            border: 3px solid #333;
+            background-color: rgb(243, 243, 243);
+        }
+
+        #block {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <input  type="text"> -->
+    <div class="box">
+        <div id="block">
+
+        </div>
+    </div>
+    <script src="./test.js"></script>
+    <script>
+        // var inp=document.querySelector('input');
+        var div = document.getElementById('block')
+
+        var divStyle = div.style
+        divStyle.left = '350px'
+        divStyle.top = '250px'
+        divStyle.background = `url('imgs/tankU.gif') no-repeat 0 0/ cover`
+
+
+        window.onkeydown = function (e) {
+            var divLeft = parseFloat(divStyle.left)
+            var divTop = parseFloat(divStyle.top)
+            // console.log(e);
+            switch (e.keyCode) {
+                case 37:
+                    if (divLeft - 50 >= 0) {
+                    console.log('左');
+                        divStyle.backgroundImage = `url('imgs/tankL.gif')`
+                        divStyle.left = divLeft - 50 + 'px'
+                        divStyle.transition = 'left 0.3s'
+                    }
+                    break;
+                case 38:
+                    if (divTop - 50 >= 0) {
+                    console.log('上');
+                        divStyle.backgroundImage = `url('imgs/tankU.gif')`
+                        divStyle.top = divTop - 50 + 'px'
+                        divStyle.transition = 'top 0.3s'
+                    }
+                    break;
+                case 39:
+                    if (divLeft + 50 <= 700) {
+                    console.log('右');
+                        divStyle.backgroundImage = `url('imgs/tankR.gif')`
+                        divStyle.left = divLeft + 50 + 'px'
+                        divStyle.transition = 'left 0.3s'
+                    }
+                    break;
+                case 40:
+                    if (divTop + 50 <= 500) {
+                    console.log('下');
+                        divStyle.backgroundImage = `url('imgs/tankD.gif')`
+                        divStyle.top = divTop + 50 + 'px'
+                        divStyle.transition = 'top 0.3s'
+                    }
+                    break;
+
+            }
+
+        }
+
+    // window.onkeypress=function(e){
+    //     console.log(e,inp.value.length);
+    //     var key=e.key.charCodeAt()
+    //     if (inp.value.length>2||key>57||key<48) {
+    //         return false
+    //     }
+    //     inp.value+=e.key
+    // }
+    </script>
+</body>
+
+</html>

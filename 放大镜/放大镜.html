@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .small {
+            position: relative;
+            width: 350px;
+            height: 350px;
+            border: 1px solid #999;
+            float: left;
+            margin-right: 10px;
+            background: url('images/mouse.jpg') no-repeat left top / 100% 100%;
+        }
+
+        .small .move {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: rgba(200, 200, 50, 0.5);
+            border: 1px solid #999;
+            box-sizing: border-box;
+            cursor: move;
+            display: none;
+        }
+
+        .big {
+            width: 540px;
+            height: 540px;
+            border: 1px solid #999;
+            display: none;
+            float: left;
+            background: url('images/mouseBigSize.jpg')
+        }
+    </style>
+</head>
+
+<body>
+    <div class="small">
+        <div class="move"> </div>
+    </div>
+    <div class="big"></div>
+    <script>
+        var small = document.querySelector('.small')
+        var smallMove = document.querySelector('.move')
+        var big = document.querySelector('.big')
+        var boxSize = {
+            small: { //小图尺寸
+                width: 350,
+                height: 350
+            },
+            big: { //大的div的尺寸
+                width: 540,
+                height: 540
+            },
+            bigImg: { //大图尺寸
+                width: 800,
+                height: 800
+            }
+        }
+        boxSize.smallMove = { //小框尺寸
+            width: boxSize.big.width / boxSize.bigImg.width * boxSize.small.width,
+            height: boxSize.big.height / boxSize.bigImg.height * boxSize.small.height
+        }
+        smallMove.style.width = boxSize.smallMove.width + 'px'
+        smallMove.style.height = boxSize.smallMove.height + 'px'
+        small.onmousemove = function (e) {
+            var x;
+            var y;
+            var style = getComputedStyle(smallMove)
+            var left = parseFloat(style.left)
+            var top = parseFloat(style.top)
+            if (e.target === small) {
+                x = e.offsetX
+                y = e.offsetY
+            } else {
+                x = e.offsetX + left
+                y = e.offsetY + top
+            }
+            x = x - boxSize.smallMove.width / 2
+            y = y - boxSize.smallMove.height / 2
+            if (x < 0) {
+                x = 0
+            } else if (x > boxSize.small.width - boxSize.smallMove.width) {
+                x = boxSize.small.width - boxSize.smallMove.width
+            }
+            if (y < 0) {
+                y = 0
+            } else if (y > (boxSize.small.height - boxSize.smallMove.height)) {
+                y = boxSize.small.height - boxSize.smallMove.height
+            }
+            var bigLeft=left/boxSize.small.width*boxSize.bigImg.width
+            var bigTop=top/boxSize.small.height*boxSize.bigImg.height
+            big.style.backgroundPosition=`-${bigLeft}px -${bigTop}px`
+            smallMove.style.left = x + 'px'
+            smallMove.style.top = y + 'px'
+        }
+
+        function aaaa() {
+
+        }
+
+        //初始化方块和大图
+        small.onmouseenter = function () {
+            smallMove.style.display = 'block'
+            big.style.display = 'block'
+        }
+        small.onmouseleave = function () {
+            smallMove.style.display = 'none'
+            big.style.display = 'none'
+
+        }
+    </script>
+</body>
+
+</html>

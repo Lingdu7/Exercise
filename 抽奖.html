@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            border-radius: 5px;
+            width: 302px;
+            height: 302px;
+            margin: 100px auto 30px auto;
+            box-sizing: border-box;
+            border: 1px #333 solid;
+        }
+
+        .grid {
+
+            border-radius: 5px;
+            width: 100px;
+            height: 100px;
+            border: #333 1px solid;
+            box-sizing: border-box;
+            float: left;
+        }
+
+        .btn {
+            width: 302px;
+            margin: 0 auto;
+            line-height: 20px;
+            color: #fff;
+            background: #f00;
+            text-align: center;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="box">
+        <div class="grid"></div>
+        <div class="grid"></div>
+        <div class="grid"></div>
+        <div class="grid"></div>
+        <div class="grid"></div>
+        <div class="grid"></div>
+        <div class="grid"></div>
+        <div class="grid"></div>
+        <div class="grid"></div>
+    </div>
+    <div class="btn">开始抽奖</div>
+
+
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
+    <script>
+        $(function () {
+            var grids = $('.grid')
+
+            var setTim;
+            $('.btn').click(function () {
+
+                var index = 0
+                if (!setTim) {
+                    setTim = setInterval(function () {
+                        turn(index)
+                        index++
+                        if (index >= 9) {
+                            index = 0
+                        }
+                    }, 120)
+
+                    setTimeout(() => {
+                    clearInterval(setTim)
+                    var iMax = random(0, 9)
+                    var time=50
+                    setTim = setTimeout(function aa() {
+                        turn(index)
+                        time+=50
+
+                        setTim=setTimeout(aa,120+time)
+                        if (index === iMax) {
+                            console.log(iMax);
+                            
+                            grids.eq(index).siblings().css('background', 'transparent')
+                            grids.eq(index).css('background', '#f00').delay(200).fadeOut(100).fadeIn(100).fadeOut(300).fadeIn(300)
+                            // clearInterval(setTim)
+                            clearTimeout(setTim)
+                            setTim=null
+                            time=30;
+                        }
+                        index++
+                        if (index >= 9) {
+                            index = 0
+                        }
+                    }, 120+time)
+                },2750);
+                }
+                // setTimeout(() => {
+                //     clearInterval(setTim)
+                //     setTim = null
+                //     var iMax = random(0, 9)
+                //     $.each(grids, function (index, item) {
+                //         turn(index)
+                //         console.log(index ,iMax);
+                        
+                //         if (index === iMax) {
+                //             grids.eq(index).siblings().css('background', 'transparent')
+                //             grids.eq(index).css('background', '#f90')
+                //             return false
+                //         }
+                //     })
+                // }, random(2000, 1500));
+            })
+
+            function turn(index) {
+                grids.eq(index).siblings().css('background', 'transparent')
+                grids.eq(index).css('background', '#f00')
+            }
+
+            function random(max, min) {
+                return Math.floor(Math.random() * (max - min) + min)
+            }
+        })
+    </script>
+</body>
+
+</html>
