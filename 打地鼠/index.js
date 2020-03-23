@@ -1,33 +1,37 @@
 $(function () {
-    var position = [[52.5, 28.3], [1.8, 31.3], [26.5, 22.3], [27.5, 38.3], [58.5, 42.3], [0.8, 44.3], [4.8, 59.3], [59.8, 60], [32.8, 55.2]]
     var score=0;
     var settim;
     var schebuleWidth=$('.schebule').width()
+    var holes=$('.hole').children()
+
+    var notHit;
     /**
      * 开始游戏
      */
     function start() {
+        if ($('.schebule').width()>1) {
         var index = 0
         // 随机生成图片属性
         var img = $('<img>')
         var pos = random(0, 9)
         var roles = random(0, 10) > 2 ? 'h' : 'x'
-        img.css({
-            'top': position[pos][1] + '%',
-            'left': position[pos][0] + '%'
-        })
+        // img.css({
+        //     'top': position[pos][1] + '%',
+        //     'left': position[pos][0] + '%'
+        // })
        
     // 设置图片动画
     animation(img,roles,index,5)   
     
     // 添加元素
-        $('.gaming').append(img)
+    holes.eq(pos).append(img)
 
     // 点击事件
     gameRules(img,roles)
 
 
-    }
+    }}
+
         /**
          * 设置图片动画
          */
@@ -37,15 +41,15 @@ $(function () {
                 img.attr('src', `./images/${roles}${index}.png`)
                 index++
                 if (index>maxIndex) {
-                    clearInterval(settim)
+                     clearInterval(settim)
                     settim=null
-                    setTimeout(() => {
+                    notHit=setTimeout(() => {
                         img.remove()
                         start()
                     }, 360);
                 }
-            }, 120);
-        }
+            }, 80);
+        } 
 
     /**
      * 拍打点击
@@ -53,6 +57,7 @@ $(function () {
      */
     function gameRules(dom) {
         dom.one('click',()=>{
+            clearTimeout(notHit)
         console.log(dom.attr('src').indexOf('h'));
         if (dom.attr('src').indexOf('h')!== -1) {
             score+=10
@@ -73,6 +78,7 @@ $(function () {
     function schebule() {
        var setOut=setTimeout(function() {
         clearInterval(settim)
+        $('.hole img').off( )
         $('.over').fadeIn(100)
         clearTimeout(setOut)
        }, 10000);
@@ -102,8 +108,10 @@ $(function () {
 
     $('.over .btn').click(function(){
         $('.over').hide()
-        $('.gaming').empty()
+        $('.hole div').empty('img')
         $('.schebule').width(schebuleWidth)
+        score=0
+        $('.score').text(score)
         start()
         schebule()
     })
