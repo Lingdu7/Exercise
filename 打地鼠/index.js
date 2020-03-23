@@ -81,10 +81,10 @@ $(function () {
         $('.hole img').off( )
         $('.over').fadeIn(100)
         clearTimeout(setOut)
-       }, 10000);
+       }, 30000);
         $('.schebule').animate({
             width:1
-        },10000)
+        },30000)
     }
 
 
